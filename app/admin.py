@@ -20,9 +20,3 @@ class NewsletterAdmin(admin.ModelAdmin):
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('title',)
     search_fields = ('title',)
-
-
-@admin.register(Attempt)
-class AttemptAdmin(admin.ModelAdmin):
-    list_display = ('date_time', 'status', 'response')
-    search_fields = ('date_time', 'status', 'response')
