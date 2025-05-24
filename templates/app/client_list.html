@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Mail Sender | Клиенты
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-4">Клиенты <i class="fa-solid fa-person"></i></h1>
+        <div class="row mt-4">
+            <div class="col">
+                <a href="{% url 'app:client-create' %}" class="btn btn-primary col-12 col-sm-5 col-lg-3 col-xl-2 mb-2">Добавить <i
+                        class="fa-solid fa-plus"></i></a>
+                <a href="#" class="btn btn-primary col-12 col-sm-5 col-lg-3 col-xl-2 mb-2">Загрузить из Excel <i class="fa-solid fa-table"></i></a>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="col-1">ID</th>
+                            <th class="col-3">Электронная почта</th>
+                            <th class="col-6">ФИО</th>
+                            <th class="col-2">Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for object in object_list %}
+                            <tr>
+                                <td>{{ object.pk }}</td>
+                                <td>{{ object.email }}</td>
+                                <td>{{ object.surname }} {{ object.name }} {{ object.patronymic }}</td>
+                                <td>
+                                    <a href="{% url 'app:client-detail' object.pk %}" class="btn btn-primary mb-1">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="{% url 'app:client-edit' object.pk %}" class="btn btn-primary mb-1">
+                                        <i class="fa-solid fa-pencil"></i>
+                                    </a>
+                                    <a href="{% url 'app:client-delete' object.pk %}" class="btn btn-danger mb-1">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% include 'includes/pagination.html' %}
+            </div>
+            <div class="col text-end">
+                <p>Всего : {{ client_count }}</p>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}
