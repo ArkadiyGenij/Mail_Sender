@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'users:dashboard' %}">Главная <i
+                            class="fa-solid fa-house"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Клиенты <i class="fa-solid fa-person text-white"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Рассылки <i class="fa-solid fa-gear text-white"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Сообщения <i
+                            class="fa-solid fa-envelope text-white"></i></a>
+                </li>
+            </ul>
+            {% if user.is_authenticated %}
+                <form action="{% url 'users:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Выход <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'users:login' %}" class="btn btn-success">Войти</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>

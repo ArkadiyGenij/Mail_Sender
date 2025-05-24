@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Mail Sender | Админпанель
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-4">Общая статистика <i class="fa-solid fa-stethoscope"></i></h1>
+        <div class="row mt-4">
+            <div class="col-4 mb-4">
+                <div class="card card__dash_general text-center">
+                    <div class="card-body">
+                        <h2>Всего рассылок</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card card__dash_general text-center">
+                    <div class="card-body">
+                        <h2>Активные сейчас</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card card__dash_general text-center">
+                    <div class="card-body">
+                        <h2>Запланированные</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card card__dash_general text-center">
+                    <div class="card-body">
+                        <h2>Завершенные</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card card__dash_general text-center">
+                    <div class="card-body">
+                        <h2>Уникальных клиентов</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1 class="mt-4">Графики и визуализации <i class="fa-solid fa-chart-pie"></i></h1>
+        <div class="row mt-4">
+            <div class="col-12 mb-4">
+                <div class="card card__dash_charts">
+                    <div class="card-body">
+                        <h2>График активности рассылок</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-4">
+                <div class="card card__dash_charts">
+                    <div class="card-body">
+                        <h2>Статусы попыток отправки</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card card__dash_charts">
+                    <div class="card-body">
+                        <h2>Время обработки внешним сервисом</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1 class="mt-4">Последние рассылки <i class="fa-solid fa-paper-plane"></i></h1>
+        <div class="row mt-4">
+            <div class="col-12 mb-4">
+                <div class="card card__dash_charts">
+                    <div class="card-body">
+                        <h2>Последние рассылки</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
