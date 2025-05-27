@@ -16,10 +16,7 @@ def dashboard(request):
 # Create your views here.
 class ClientListView(ListView):
     model = Client
-    paginate_by = 15
-    extra_context = {
-        'client_count': Client.objects.count()
-    }
+    paginate_by = 10
 
 
 class ClientCreateView(CreateView):

@@ -8,12 +8,24 @@
     <div class="container">
         <h1 class="mt-4">Клиенты <i class="fa-solid fa-person"></i></h1>
         <div class="row mt-4">
-            <div class="col">
-                <a href="{% url 'app:client-create' %}" class="btn btn-primary col-12 col-sm-5 col-lg-3 col-xl-2 mb-2">Добавить <i
+            <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+                <a href="{% url 'app:client-create' %}" class="btn btn-primary col-12">Добавить <i
                         class="fa-solid fa-plus"></i></a>
-                <a href="#" class="btn btn-primary col-12 col-sm-5 col-lg-3 col-xl-2 mb-2">Загрузить из Excel <i class="fa-solid fa-table"></i></a>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+                <a href="#" class="btn btn-primary col-12">Загрузить из Excel <i
+                        class="fa-solid fa-table"></i></a>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 mb-2">
+                <form action="#" method="get" class="d-flex">
+                    <input type="text" class="form-control me-2"/>
+                    <button class="btn btn-primary col" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
             </div>
         </div>
+
         <div class="row mt-2">
             <div class="col-12">
                 <div class="table-responsive">
@@ -31,7 +43,7 @@
                             <tr>
                                 <td>{{ object.pk }}</td>
                                 <td>{{ object.email }}</td>
-                                <td>{{ object.surname }} {{ object.name }} {{ object.patronymic }}</td>
+                                <td>{{ object.get_full_name }}</td>
                                 <td>
                                     <a href="{% url 'app:client-detail' object.pk %}" class="btn btn-primary mb-1">
                                         <i class="fa-solid fa-eye"></i>
@@ -44,12 +56,20 @@
                                     </a>
                                 </td>
                             </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">
+                                    {% if search_query %}
+                                        Ничего не найдено
+                                    {% else %}
+                                        Нет клиентов
+                                    {% endif %}
+                                </td>
+                            </tr>
                         {% endfor %}
                         </tbody>
                     </table>
-
                 </div>
-
             </div>
         </div>
         <div class="row">
@@ -57,10 +77,8 @@
                 {% include 'includes/pagination.html' %}
             </div>
             <div class="col text-end">
-                <p>Всего : {{ client_count }}</p>
+                <p>Всего: {{ paginator.count }}</p>
             </div>
-
-
         </div>
     </div>
 {% endblock %}
