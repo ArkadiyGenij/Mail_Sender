@@ -43,7 +43,7 @@
                             <tr>
                                 <td>{{ object.pk }}</td>
                                 <td>{{ object.email }}</td>
-                                <td>{{ object.get_full_name }}</td>
+                                <td>{{ object.surname }} {{ object.name }} {{ object.patronymic }}</td>
                                 <td>
                                     <a href="{% url 'app:client-detail' object.pk %}" class="btn btn-primary mb-1">
                                         <i class="fa-solid fa-eye"></i>
@@ -54,16 +54,6 @@
                                     <a href="{% url 'app:client-delete' object.pk %}" class="btn btn-danger mb-1">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
-                                </td>
-                            </tr>
-                        {% empty %}
-                            <tr>
-                                <td colspan="4" class="text-center">
-                                    {% if search_query %}
-                                        Ничего не найдено
-                                    {% else %}
-                                        Нет клиентов
-                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}

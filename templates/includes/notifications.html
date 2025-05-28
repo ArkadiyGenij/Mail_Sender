@@ -1,0 +1,20 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        {% if messages %}
+            {% for message in messages %}
+                new Noty({
+                    type: '{{ message.tags }}',
+                    {% if message.tags == 'success' %}
+                        text: '<i class="fa-regular fa-circle-check"></i> {{ message }}',
+                    {% elif message.tags == 'error'%}
+                        text: '<i class="fa-solid fa-xmark"></i> {{ message }}',
+                    {% endif %}
+                    layout: 'bottomRight',
+                    timeout: 3000,
+                    theme: 'sunset',
+                    progressBar: true,
+                }).show();
+            {% endfor %}
+        {% endif %}
+    });
+</script>

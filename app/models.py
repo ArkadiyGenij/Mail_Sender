@@ -25,10 +25,6 @@ class Client(models.Model):
     def __str__(self):
         return self.email
 
-    def get_full_name(self):
-        parts = [self.surname, self.name, self.patronymic]
-        return ' '.join(part for part in parts if part)
-
     class Meta:
         verbose_name = 'клиент'
         verbose_name_plural = 'клиенты'

@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'users',
-    'watson'
 ]
 
 MIDDLEWARE = [
@@ -128,4 +127,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
 LOGOUT_REDIRECT_URL = 'users:login'
-LOGIN_REDIRECT_URL = 'users:dashboard'
+LOGIN_REDIRECT_URL = 'app:dashboard'

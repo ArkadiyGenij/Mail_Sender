@@ -1,10 +1,21 @@
+from django.contrib import messages
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, TemplateView, CreateView, UpdateView, DetailView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
 from app.forms import ClientCreateForm
 from app.models import Client
 
+
+class MessageMixin:
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'Успешно!')
+        return response
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Ошибка!')
+        return super().form_invalid(form)
 
 def dashboard(request):
     context = {
@@ -19,13 +30,13 @@ class ClientListView(ListView):
     paginate_by = 10
 
 
-class ClientCreateView(CreateView):
+class ClientCreateView(MessageMixin, CreateView):
     model = Client
     form_class = ClientCreateForm
     success_url = reverse_lazy('app:client-list')
 
 
-class ClientUpdateView(UpdateView):
+class ClientUpdateView(MessageMixin, UpdateView):
     model = Client
     form_class = ClientCreateForm
     success_url = reverse_lazy('app:client-list')
@@ -35,6 +46,6 @@ class ClientDetailView(DetailView):
     model = Client
 
 
-class ClientDeleteView(DeleteView):
+class ClientDeleteView(MessageMixin, DeleteView):
     model = Client
-    reverse_url = reverse_lazy('app:client-list')
+    success_url = reverse_lazy('app:client-list')
