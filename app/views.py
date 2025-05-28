@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
-from app.forms import ClientCreateForm
-from app.models import Client
+from app.forms import ClientCreateForm, MessageCreateForm
+from app.models import Client, Message
 
 
 class MessageMixin:
@@ -49,3 +49,29 @@ class ClientDetailView(DetailView):
 class ClientDeleteView(MessageMixin, DeleteView):
     model = Client
     success_url = reverse_lazy('app:client-list')
+
+
+class MessageListView(ListView):
+    model = Message
+    paginate_by = 9
+
+
+class MessageDetailView(DetailView):
+    model = Message
+
+
+class MessageCreateView(MessageMixin, CreateView):
+    model = Message
+    form_class = MessageCreateForm
+    success_url = reverse_lazy('app:message-list')
+
+
+class MessageUpdateView(MessageMixin, UpdateView):
+    model = Message
+    form_class = MessageCreateForm
+    success_url = reverse_lazy('app:message-list')
+
+
+class MessageDeleteView(MessageMixin, DeleteView):
+    model = Message
+    success_url = reverse_lazy('app:message-list')

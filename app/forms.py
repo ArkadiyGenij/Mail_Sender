@@ -1,6 +1,6 @@
 from django import forms
 
-from app.models import Client
+from app.models import Client, Message
 
 
 class StyleFormMixin(forms.Form):
@@ -13,4 +13,10 @@ class StyleFormMixin(forms.Form):
 class ClientCreateForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Client
+        fields = '__all__'
+
+
+class MessageCreateForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Message
         fields = '__all__'
