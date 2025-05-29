@@ -30,23 +30,36 @@ class Client(models.Model):
         verbose_name_plural = 'клиенты'
 
 
+class Message(models.Model):
+    title = models.CharField(max_length=100, verbose_name='заголовок', default='')
+    body = models.TextField(max_length=5000, verbose_name='сообщение', default='', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'сообщение'
+        verbose_name_plural = 'сообщения'
+
 class Newsletter(models.Model):
     PERIODICITY_CHOICES = {
-        ('day', 'раз в день'),
-        ('week', 'раз в неделю'),
-        ('month', 'раз в месяц'),
+        ('day', 'Раз в день'),
+        ('week', 'Раз в неделю'),
+        ('month', 'Раз в месяц'),
     }
 
     STATUS_CHOICES = {
-        ('created', 'создана'),
-        ('launched', 'запущена'),
-        ('completed', 'завершена')
+        ('created', 'Создана'),
+        ('launched', 'Запущена'),
+        ('completed', 'Завершена')
     }
 
     date_time = models.DateTimeField(verbose_name='дата и время рассылки', default=timezone.now)
     periodicity = models.CharField(choices=PERIODICITY_CHOICES, default='day',
                                    verbose_name='периодичность рассылки')
     status = models.CharField(choices=STATUS_CHOICES, default='created', verbose_name='статус')
+    clients = models.ManyToManyField(Client, verbose_name='клиенты')
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='Сообщение')
 
     def __str__(self):
         return self.date_time
@@ -55,17 +68,6 @@ class Newsletter(models.Model):
         verbose_name = 'рассылка'
         verbose_name_plural = 'рассылки'
 
-
-class Message(models.Model):
-    title = models.CharField(max_length=100, verbose_name='заголовок', default='')
-    body = models.TextField(max_length=5000, verbose_name='сообщение', default='')
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'сообщение'
-        verbose_name_plural = 'сообщения'
 
 
 class Attempt(models.Model):

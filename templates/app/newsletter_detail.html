@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Mail Sender | Информация о рассылке
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-4 justify-content-center">
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1>Информация о рассылке</h1>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Дата и время начала:</strong>{{ object.date_time }}</p>
+                        <p><strong>Периодичность:</strong>{{ object.periodicity }}</p>
+                        <p><strong>Статус:</strong>{{ object.status }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'app:newsletter-list' %}" class="btn btn-primary w-100 mt-2">Вернуться</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

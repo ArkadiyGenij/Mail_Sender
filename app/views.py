@@ -3,8 +3,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
-from app.forms import ClientCreateForm, MessageCreateForm
-from app.models import Client, Message
+from app.forms import ClientCreateForm, MessageCreateForm, NewsletterCreateForm
+from app.models import Client, Message, Newsletter
 
 
 class MessageMixin:
@@ -75,3 +75,29 @@ class MessageUpdateView(MessageMixin, UpdateView):
 class MessageDeleteView(MessageMixin, DeleteView):
     model = Message
     success_url = reverse_lazy('app:message-list')
+
+
+class NewsletterListView(ListView):
+    model = Newsletter
+    paginate_by = 9
+
+
+class NewsletterDetailView(DetailView):
+    model = Message
+
+
+class NewsletterCreateView(MessageMixin, CreateView):
+    model = Newsletter
+    form_class = NewsletterCreateForm
+    success_url = reverse_lazy('app:newsletter-list')
+
+
+class NewsletterUpdateView(MessageMixin, UpdateView):
+    model = Newsletter
+    form_class = NewsletterCreateForm
+    success_url = reverse_lazy('app:newsletter-list')
+
+
+class NewsletterDeleteView(MessageMixin, DeleteView):
+    model = Newsletter
+    success_url = reverse_lazy('app:newsletter-list')

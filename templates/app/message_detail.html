@@ -7,14 +7,14 @@
 {% block content %}
     <div class="container">
         <div class="row mt-4 justify-content-center">
-            <div class="col-12 col-lg-6">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-header text-center">
                         <h1>Информация о сообщении</h1>
                     </div>
                     <div class="card-body">
-                        <p>Заголовок: {{ object.title }}</p>
-                        <p>Содержание: {{ object.body }}</p>
+                        <p><strong>Заголовок:</strong> {{ object.title }}</p>
+                        <p><strong>Содержание:</strong> {{ object.body }}</p>
                     </div>
                     <div class="card-footer">
                         <a href="{% url 'app:message-list' %}" class="btn btn-primary w-100 mt-2">Вернуться</a>

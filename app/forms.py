@@ -1,6 +1,6 @@
 from django import forms
 
-from app.models import Client, Message
+from app.models import Client, Message, Newsletter
 
 
 class StyleFormMixin(forms.Form):
@@ -17,6 +17,14 @@ class ClientCreateForm(StyleFormMixin, forms.ModelForm):
 
 
 class MessageCreateForm(StyleFormMixin, forms.ModelForm):
+    body = forms.CharField(widget=forms.Textarea(attrs={'rows': '20', }), label='Сообщение')
+
     class Meta:
         model = Message
         fields = '__all__'
+
+
+class NewsletterCreateForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Newsletter
+        fields = ['date_time', 'periodicity', 'clients', 'message']

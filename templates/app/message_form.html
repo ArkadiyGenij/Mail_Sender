@@ -12,7 +12,7 @@
 {% block content %}
     <div class="container">
         <div class="row mt-4 justify-content-center">
-            <div class="col-12 col-lg-9">
+            <div class="col-12 col-lg-12">
                 <form method="post">
                     <div class="card">
                         <div class="card-header text-center">
@@ -27,12 +27,20 @@
                             {{ form.as_p }}
                         </div>
                         <div class="card-footer">
-                            {% if client %}
-                                <button class="btn btn-primary w-100" type="submit">Сохранить изменения</button>
-                            {% else %}
-                                <button class="btn btn-primary w-100" type="submit">Добавить сообщения</button>
-                            {% endif %}
-                            <a href="{% url 'app:message-list' %}" class="btn btn-danger w-100 mt-2">Вернуться</a>
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    {% if client %}
+                                        <button class="btn btn-primary w-100 mb-2" type="submit">Сохранить изменения</button>
+                                    {% else %}
+                                        <button class="btn btn-primary w-100 mb-2" type="submit">Добавить сообщения</button>
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <a href="{% url 'app:message-list' %}"
+                                       class="btn btn-danger w-100">Вернуться</a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </form>
