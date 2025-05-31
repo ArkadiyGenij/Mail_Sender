@@ -32,7 +32,7 @@ class Client(models.Model):
 
 class Message(models.Model):
     title = models.CharField(max_length=100, verbose_name='заголовок', default='')
-    body = models.TextField(max_length=5000, verbose_name='сообщение', default='', blank=True, null=True)
+    body = models.TextField(max_length=5000, verbose_name='сообщение', blank=False, null=False)
 
     def __str__(self):
         return self.title
@@ -41,18 +41,19 @@ class Message(models.Model):
         verbose_name = 'сообщение'
         verbose_name_plural = 'сообщения'
 
+
 class Newsletter(models.Model):
-    PERIODICITY_CHOICES = {
+    PERIODICITY_CHOICES = [
         ('day', 'Раз в день'),
         ('week', 'Раз в неделю'),
         ('month', 'Раз в месяц'),
-    }
+    ]
 
-    STATUS_CHOICES = {
+    STATUS_CHOICES = [
         ('created', 'Создана'),
         ('launched', 'Запущена'),
         ('completed', 'Завершена')
-    }
+    ]
 
     date_time = models.DateTimeField(verbose_name='дата и время рассылки', default=timezone.now)
     periodicity = models.CharField(choices=PERIODICITY_CHOICES, default='day',
@@ -69,20 +70,19 @@ class Newsletter(models.Model):
         verbose_name_plural = 'рассылки'
 
 
-
 class Attempt(models.Model):
-    ATTEMPT_STATUS_CHOICES = {
-        ('success', 'успешно'),
-        ('failed', 'не успешно'),
-    }
-
+    ATTEMPT_STATUS_CHOICES = [
+        ('success', 'Успешно'),
+        ('failed', 'Не успешно'),
+    ]
     date_time = models.DateTimeField(verbose_name='дата и время последней попытки', default=timezone.now)
     status = models.CharField(choices=ATTEMPT_STATUS_CHOICES, default='success',
                               verbose_name='статус последней попытки')
-    response = models.TextField(verbose_name='ответ сервера')
+    response = models.TextField(verbose_name='ответ сервера', **NULLABLE)
+    newsletter = models.ForeignKey(Newsletter, on_delete=models.CASCADE, verbose_name='попытка')
 
     def __str__(self):
-        return self.date_time
+        return f"Рассылка от {self.date_time}"
 
     class Meta:
         verbose_name = 'попытка'

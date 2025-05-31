@@ -12,7 +12,7 @@
 {% block content %}
     <div class="container">
         <div class="row mt-4 justify-content-center">
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-9">
                 <form method="post">
                     <div class="card">
                         <div class="card-header text-center">
@@ -24,15 +24,56 @@
                         </div>
                         <div class="card-body">
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            <div class="row">
+                                <div class="col-12 col-lg-6 mb-2">
+                                    <label for="{{ form.date_time.id_for_label }}">Дата и время:</label>
+                                    {{ form.date_time }}
+                                    {% if form.date_time.errors %}
+                                        <div class="error">{{ form.date_time.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 col-lg-6 mb-2">
+                                    <label for="{{ form.periodicity.id_for_label }}">Периодичность:</label>
+                                    {{ form.periodicity }}
+                                    {% if form.periodicity.errors %}
+                                        <div class="error">{{ form.periodicity.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <label for="{{ form.clients.id_for_label }}">Клиенты:</label>
+                                    {{ form.clients }}
+                                    {% if form.clients.errors %}
+                                        <div class="error">{{ form.clients.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <label for="{{ form.message.id_for_label }}">Сообщение:</label>
+                                    {{ form.message }}
+                                    {% if form.message.errors %}
+                                        <div class="error">{{ form.message.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
-                            {% if client %}
-                                <button class="btn btn-primary w-100" type="submit">Сохранить изменения</button>
-                            {% else %}
-                                <button class="btn btn-primary w-100" type="submit">Добавить рассылку</button>
-                            {% endif %}
-                            <a href="{% url 'app:newsletter-list' %}" class="btn btn-danger w-100 mt-2">Вернуться</a>
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    {% if client %}
+                                        <button class="btn btn-primary w-100 mb-2" type="submit">Сохранить изменения</button>
+                                    {% else %}
+                                        <button class="btn btn-primary w-100 mb-2" type="submit">Добавить рассылку</button>
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <a href="{% url 'app:newsletter-list' %}" class="btn btn-danger w-100 mb-2">Вернуться</a>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </form>

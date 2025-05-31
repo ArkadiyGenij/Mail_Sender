@@ -40,7 +40,23 @@
                             <tr>
                                 <td>{{ object.pk }}</td>
                                 <td>{{ object.date_time }}</td>
-                                <td>{{ object.periodicity }}</td>
+                                <td>
+                                    {% if object.periodicity == 'day' %}
+                                        Раз в день
+                                    {% elif object.periodicity == 'week' %}
+                                        Раз в неделю
+                                    {% else %}
+                                        Раз в месяц
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if object.status == 'created' %}
+                                        Создана
+                                    {% elif object.status == 'launched' %}
+                                        Запущенна
+                                    {% else %}
+                                        Завершена
+                                    {% endif %}</td>
                                 <td>
                                     <a href="{% url 'app:newsletter-detail' object.pk %}" class="btn btn-primary mb-1">
                                         <i class="fa-solid fa-eye"></i>

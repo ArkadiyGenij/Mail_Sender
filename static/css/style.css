@@ -13,7 +13,3 @@
 .card__zoom_effect:hover {
     transform: scale(1.02);
 }
-
-.card__message_height {
-    height: 350px;
-}

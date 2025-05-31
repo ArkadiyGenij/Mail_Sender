@@ -25,6 +25,9 @@ class MessageCreateForm(StyleFormMixin, forms.ModelForm):
 
 
 class NewsletterCreateForm(StyleFormMixin, forms.ModelForm):
+
+    date_time = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
+
     class Meta:
         model = Newsletter
         fields = ['date_time', 'periodicity', 'clients', 'message']
